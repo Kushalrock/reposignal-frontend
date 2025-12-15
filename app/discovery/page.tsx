@@ -1,8 +1,4 @@
-/**
- * Inline Chevron Icon
- */
 'use client';
-
 function ChevronIcon(props: { className?: string }) {
   return (
     <svg
