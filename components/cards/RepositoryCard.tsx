@@ -28,10 +28,10 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
         <div className="flex gap-2 mb-4">
           {repository.domains.map((domain) => (
             <span
-              key={domain}
+              key={domain.id}
               className="text-xs px-2 py-1 rounded bg-neutral-900 text-neutral-500"
             >
-              {domain}
+              {domain.displayName}
             </span>
           ))}
         </div>
@@ -41,18 +41,18 @@ export function RepositoryCard({ repository }: RepositoryCardProps) {
       <div className="flex flex-wrap gap-2 mb-4">
         {repository.languages.slice(0, 3).map((lang) => (
           <span
-            key={lang}
+            key={lang.id}
             className="text-xs px-2 py-1 rounded bg-neutral-800 text-neutral-400"
           >
-            {lang}
+            {lang.displayName}
           </span>
         ))}
         {repository.frameworks.slice(0, 2).map((fw) => (
           <span
-            key={fw.framework}
+            key={fw.id}
             className="text-xs px-2 py-1 rounded bg-neutral-800 text-neutral-400"
           >
-            {fw.framework}
+            {fw.displayName}
           </span>
         ))}
       </div>

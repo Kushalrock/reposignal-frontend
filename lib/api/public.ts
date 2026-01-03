@@ -16,6 +16,26 @@ export interface Issue {
   updatedAt: string;
 }
 
+export interface CanonicalLanguage {
+  id: number;
+  matchingName: string;
+  displayName: string;
+}
+
+export interface CanonicalFramework {
+  id: number;
+  matchingName: string;
+  displayName: string;
+  category: string;
+  source?: 'inferred' | 'maintainer';
+}
+
+export interface CanonicalDomain {
+  id: number;
+  matchingName: string;
+  displayName: string;
+}
+
 export interface Repository {
   githubRepoId: number;
   owner: string;
@@ -23,12 +43,9 @@ export interface Repository {
   starsCount: number;
   forksCount: number;
   openIssuesCount: number;
-  domains: string[];
-  frameworks: Array<{
-    framework: string;
-    source: 'inferred' | 'maintainer';
-  }>;
-  languages: string[];
+  domains: CanonicalDomain[];
+  frameworks: CanonicalFramework[];
+  languages: CanonicalLanguage[];
 }
 
 export interface DiscoveryResult {

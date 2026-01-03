@@ -67,10 +67,10 @@ export default function RepositoryPage({ params }: { params: Promise<{ id: strin
           <div className="flex gap-2 mb-4">
             {repository.domains.map((domain) => (
               <span
-                key={domain}
+                key={domain.id}
                 className="px-3 py-1 text-sm rounded bg-neutral-900 text-neutral-400"
               >
-                {domain}
+                {domain.displayName}
               </span>
             ))}
           </div>
@@ -101,18 +101,18 @@ export default function RepositoryPage({ params }: { params: Promise<{ id: strin
         <div className="flex flex-wrap gap-2">
           {repository.languages.map((lang) => (
             <span
-              key={lang}
+              key={lang.id}
               className="px-3 py-1 text-sm rounded bg-neutral-900 text-neutral-400"
             >
-              {lang}
+              {lang.displayName}
             </span>
           ))}
           {repository.frameworks.map((fw) => (
             <span
-              key={fw.framework}
+              key={fw.id}
               className="px-3 py-1 text-sm rounded bg-neutral-900 text-neutral-400"
             >
-              {fw.framework}
+              {fw.displayName}
             </span>
           ))}
         </div>

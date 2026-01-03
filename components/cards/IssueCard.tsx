@@ -6,6 +6,7 @@
 
 'use client';
 
+import Link from 'next/link';
 import { DiscoveryResult } from '@/lib/api/public';
 
 interface IssueCardProps {
@@ -25,8 +26,9 @@ export function IssueCard({ result, onClick }: IssueCardProps) {
   const { issue, repository } = result;
 
   return (
-    <div
-      className="border border-neutral-800 rounded-lg p-6 hover:border-neutral-700 transition-colors cursor-pointer"
+    <Link
+      href={`/repository/${repository.githubRepoId}`}
+      className="block border border-neutral-800 rounded-lg p-6 hover:border-neutral-700 transition-colors cursor-pointer"
       onClick={onClick}
     >
       {/* Repository Context */}
@@ -37,7 +39,7 @@ export function IssueCard({ result, onClick }: IssueCardProps) {
         {repository.domains.length > 0 && (
           <>
             <span className="text-neutral-700">·</span>
-            <span className="text-xs text-neutral-600">{repository.domains[0]}</span>
+            <span className="text-xs text-neutral-600">{repository.domains[0].displayName}</span>
           </>
         )}
       </div>
@@ -61,18 +63,18 @@ export function IssueCard({ result, onClick }: IssueCardProps) {
         <div className="flex flex-wrap gap-2 mt-4">
           {repository.languages.slice(0, 3).map((lang) => (
             <span
-              key={lang}
+              key={lang.id}
               className="text-xs px-2 py-1 rounded bg-neutral-900 text-neutral-500"
             >
-              {lang}
+              {lang.displayName}
             </span>
           ))}
           {repository.frameworks.slice(0, 2).map((fw) => (
             <span
-              key={fw.framework}
+              key={fw.id}
               className="text-xs px-2 py-1 rounded bg-neutral-900 text-neutral-500"
             >
-              {fw.framework}
+              {fw.displayName}
             </span>
           ))}
         </div>
@@ -85,6 +87,6 @@ export function IssueCard({ result, onClick }: IssueCardProps) {
           {repository.openIssuesCount} open issues
         </span>
       </div>
-    </div>
+    </Link>
   );
 }

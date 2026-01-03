@@ -1408,9 +1408,9 @@ export const openAPISpec = {
               schema: {
                 type: 'object',
                 properties: {
-                  repoId: {
+                  githubRepoId: {
                     type: 'number',
-                    description: 'Internal repository ID',
+                    description: 'GitHub repository ID',
                   },
                   githubIssueId: {
                     type: 'number',
@@ -1451,7 +1451,7 @@ export const openAPISpec = {
                     required: ['type', 'githubId', 'username'],
                   },
                 },
-                required: ['repoId', 'githubIssueId', 'actor'],
+                required: ['githubRepoId', 'githubIssueId', 'actor'],
               },
             },
           },
@@ -1469,6 +1469,110 @@ export const openAPISpec = {
           },
           '401': {
             description: 'Unauthorized',
+          },
+        },
+      },
+    },
+
+    '/bot/issues': {
+      delete: {
+        tags: ['Bot - Issues'],
+        summary: 'Delete GitHub issue',
+        operationId: 'deleteIssue',
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  githubRepoId: {
+                    type: 'number',
+                    description: 'GitHub repository ID',
+                  },
+                  githubIssueId: {
+                    type: 'number',
+                    description: 'GitHub issue ID to delete',
+                  },
+                  actor: {
+                    type: 'object',
+                    description: 'Actor performing the deletion',
+                    oneOf: [
+                      {
+                        type: 'object',
+                        properties: {
+                          type: {
+                            type: 'string',
+                            enum: ['bot'],
+                          },
+                        },
+                        required: ['type'],
+                      },
+                      {
+                        type: 'object',
+                        properties: {
+                          type: {
+                            type: 'string',
+                            enum: ['user'],
+                          },
+                          githubId: {
+                            type: 'number',
+                          },
+                          username: {
+                            type: 'string',
+                          },
+                        },
+                        required: ['type', 'githubId', 'username'],
+                      },
+                    ],
+                  },
+                },
+                required: ['githubRepoId', 'githubIssueId', 'actor'],
+              },
+            },
+          },
+        },
+        responses: {
+          '200': {
+            description: 'Issue deleted successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    success: {
+                      type: 'boolean',
+                    },
+                    deletedIssueId: {
+                      type: 'number',
+                      description: 'ID of the deleted issue',
+                    },
+                  },
+                },
+              },
+            },
+          },
+          '401': {
+            description: 'Unauthorized',
+          },
+          '404': {
+            description: 'Issue or repository not found',
+          },
+          '500': {
+            description: 'Server error',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    error: {
+                      type: 'string',
+                    },
+                  },
+                },
+              },
+            },
           },
         },
       },
@@ -1502,6 +1606,10 @@ export const openAPISpec = {
                   name: {
                     type: 'string',
                     description: 'Repository name',
+                  },
+                  reposignalDescription: {
+                    type: 'string',
+                    description: 'Custom repository description for Reposignal',
                   },
                   state: {
                     type: 'string',
