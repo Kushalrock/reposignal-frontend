@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Reposignal Frontend
 
-## Getting Started
+The frontend web application for Reposignal — an issue-first discovery platform that helps developers discover and contribute to meaningful open source work.
 
-First, run the development server:
+## Overview
+
+Reposignal Frontend is a Next.js application that provides a calm, trust-first interface for discovering open source projects and issues. The application is designed with an **anonymous-first** approach where all discovery features are available without authentication.
+
+### Key Features
+
+- 🔍 **Issue Discovery** - Browse and explore open source issues across repositories
+- 📊 **Repository Exploration** - View repository details, stats, and available issues
+- 👤 **User Profiles** - Manage preferences and repository settings (authenticated users)
+- 🌙 **Dark Mode Native** - Designed for dark mode with a calm, editorial aesthetic
+- 🔓 **Anonymous-First** - Full discovery features without requiring login
+
+### Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript (strict mode)
+- **Runtime**: Bun
+- **Styling**: Tailwind CSS 4
+- **State Management**: Zustand
+- **Authentication**: GitHub OAuth
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js v20 or higher
+- Bun (latest version)
+- Running backend API (see [Contributing Guide](CONTRIBUTING.md) for setup)
+- PostgreSQL database (configured via backend)
+- GitHub OAuth App (for authentication features)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/your-org/reposignal-frontend.git
+cd reposignal-frontend
+
+# Install dependencies
+bun install
+
+# Copy environment template
+cp .env.example .env.local
+
+# Configure your environment variables (see CONTRIBUTING.md)
+# Edit .env.local with your settings
+
+# Start development server
+bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at [http://localhost:9000](http://localhost:9000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file with the following:
 
-## Learn More
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000
+NEXT_PUBLIC_GITHUB_OAUTH_CLIENT_ID=your_github_oauth_client_id
+NEXT_PUBLIC_APP_NAME=Reposignal
+NEXT_PUBLIC_APP_URL=http://localhost:9000
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+bun run dev      # Start development server on port 9000
+bun run build    # Build for production
+bun run start    # Start production server
+bun run lint     # Run ESLint
+```
 
-## Deploy on Vercel
+### Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/              # Next.js App Router pages
+components/       # Reusable React components
+lib/              # Utilities and API clients
+store/            # Zustand state stores
+context/          # Documentation and API specs
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contributing
+
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for detailed setup instructions, including:
+
+- Setting up the backend API
+- Creating a GitHub OAuth App
+- Configuring PostgreSQL
+- Setting up the GitHub bot (optional)
+- Development workflow and guidelines
+
+**Important**: Review [context/design-principles.md](context/design-principles.md) before contributing to understand our UI/UX philosophy.
+
+## Design Philosophy
+
+Reposignal follows strict design principles:
+
+- **Trust Over Growth** - No dark patterns or growth hacks
+- **Calm by Default** - Quiet, neutral, editorial interface
+- **Anonymous-First** - Login is optional, not required
+- **No Gamification** - No rankings, scores, or badges
+- **Precision & Craft** - Every detail is intentional
+
+Read the full [Design Principles](context/design-principles.md) document.
+
+## Related Repositories
+
+- **reposignal-backend** - API server and business logic
+- **reposignal-bot** - GitHub bot for repository monitoring
+
+## License
+
+See [LICENSE](LICENSE) file for details.
+
+## Questions or Issues?
+
+- Check the [Contributing Guide](CONTRIBUTING.md) for setup help
+- Review existing issues before creating new ones
+- Read the documentation in the `context/` directory
