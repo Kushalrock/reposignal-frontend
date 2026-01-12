@@ -64,6 +64,13 @@ export function Navigation() {
               About
             </Link>
 
+            <Link
+              href="/docs"
+              className="text-sm text-neutral-400 hover:text-neutral-100 transition-colors"
+            >
+              Docs
+            </Link>
+
             {isAuthenticated ? (
               <div className="flex items-center gap-4">
                 <Link
